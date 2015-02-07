@@ -1,0 +1,6 @@
+tabhead <- read.table("household_power_consumption.txt", head = TRUE, sep = ";", nrows = 1)
+tabhead <- colnames(tabhead)
+tab <- read.table("household_power_consumption.txt", head = TRUE, sep = ";", col.names = tabhead, skip = 66636, nrows = 2880)
+png(file = "plot1.png")
+hist(tab$Global_active_power, main = "Global Active Power", xlab = "Global Active Power (kilowatts)", col = "red")
+dev.off()

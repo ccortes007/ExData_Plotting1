@@ -1,0 +1,11 @@
+tabhead <- read.table("household_power_consumption.txt", head = TRUE, sep = ";", nrows = 1)
+tabhead <- colnames(tabhead)
+tab <- read.table("household_power_consumption.txt", head = TRUE, sep = ";", col.names = tabhead, skip = 66636, nrows = 2880)
+tab$DateTime = strptime(paste(as.Date(tab$Date, "%d/%m/%Y"), tab$Time), format = "%Y-%m-%d %H:%M:%S") 
+
+png(file = "plot3.png")
+plot(tab$DateTime, tab$Sub_metering_1, type="l" , xlab = "", ylab = "Energy sub metering")
+points(tab$DateTime, tab$Sub_metering_2, type="l", col = "red")
+points(tab$DateTime, tab$Sub_metering_3, type="l", col = "blue")
+legend("topright", legend = c("Sub_metering_1", "Sub_metering_2", "Sub_metering_3"), lwd = 1, col = c("black", "red", "blue"))
+dev.off()
